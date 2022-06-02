@@ -15,9 +15,12 @@ import { QuizModule } from './modules/quiz/quiz.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async function (configService: ConfigService) {
+        const environment = configService.get('NODE_ENV');
+        const productionHost = configService.get('DB_HOST');
+        const host = environment === 'production' ? productionHost : 'localhost';
         return {
           type: 'postgres',
-          host: configService.get('DB_HOST'),
+          host,
           port: configService.get('DB_PORT'),
           username: configService.get('DB_USERNAME'),
           password: configService.get('DB_PASSWORD'),

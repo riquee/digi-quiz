@@ -18,20 +18,32 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 Para instalar o projeto em ambiente de desenvolvimento, siga estas etapas:
 
+-- Altere o arquivo .env na raiz do projeto, subistituindo o valor NODE_ENV para development
+
+```
+# NODE_ENV=development
+```
+
+- Você deverá instalar as depêndencias nos diretórios 'frontend' e 'backend':
+
+```
+<yarn install>
+```
+
 - Na raiz do projeto iremos executar o docker-compose para criar uma imagem/container do postgres:
 
 ```
 <docker-compose -f docker-compose-dev.yml up -d>
 ```
 
-- Após ter instalado o postgres, iremos executar as migrations e seeds. No diretório backend execute os seguintes comandos:
+- Após ter instalado o postgres, aguarde 30 segundos para a sua inicialização, iremos executar as migrations e seeds. No diretório backend execute os seguintes comandos:
 
 ```
 <yarn migration:run>
 <yarn seed:run>
 ```
 
-- Setup finalizado com sucesso, agora iremos executar os seguintes comandos nos diretorios 'frontend' e 'backend' para rodarmos o projeto:
+- Setup finalizado com sucesso, agora iremos executar o seguinte comando nos diretorios 'frontend' e 'backend' para rodarmos o projeto:
 
 ```
 <yarn dev>
@@ -43,13 +55,19 @@ Para instalar o projeto em ambiente de desenvolvimento, siga estas etapas:
 
 Para instalar o projeto em ambiente de produção, siga estas etapas:
 
+-- Altere o arquivo .env na raiz do projeto, subistituindo o valor NODE_ENV para production
+
+```
+# NODE_ENV=production
+```
+
 - Na raiz do projeto iremos executar o docker-compose para criar uma imagem/container do postgres:
 
 ```
-<docker-compose up -d --build postgres>
+<docker-compose up -d --build db>
 ```
 
-- Após ter instalado o postgres, iremos executar as migrations e seeds. No diretório backend execute os seguintes comandos:
+- Após ter instalado o postgres, aguarde 30 segundos para a sua inicialização, iremos executar as migrations e seeds. No diretório backend execute os seguintes comandos:
 
 ```
 <yarn migration:run>
