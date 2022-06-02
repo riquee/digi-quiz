@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:12.2
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+    networks:
+      - reverse-proxy
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+    command: yarn start
+    env_file:
+      - .env
+    networks:
+      - reverse-proxy
+    depends_on:
+      - db
+networks:
+  reverse-proxy:
+    driver: bridge
